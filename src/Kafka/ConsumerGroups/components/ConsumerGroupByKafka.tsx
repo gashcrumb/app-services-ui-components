@@ -17,14 +17,12 @@ import {
 } from "@patternfly/react-table";
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { Consumer, ConsumerGroupStateEnum } from "../types";
-import { displayConsumerGroupState } from "../utils";
+import { Consumer, ConsumerGroupState } from "../types";
 import { ConsumerGroupPopover } from "./ConsumerGroupPopover";
 import { activeMembers, partionsWithLag } from "../utils";
-import { ConsumerGroupState } from "./ConsumerGroupState";
 
 export type ConsumerGroupByKafkaProps = {
-  state: ConsumerGroupStateEnum;
+  state: ConsumerGroupState;
   consumers: Consumer[];
 };
 
@@ -66,7 +64,7 @@ export const ConsumerGroupByKafka: FunctionComponent<
           </FlexItem>
           <FlexItem>
             <Text component={TextVariants.h4}>{t("consumerGroup.state")}</Text>
-            <Text component={TextVariants.h2}>{ConsumerGroupState(state)}</Text>
+            <Text component={TextVariants.h2}>{state}</Text>
           </FlexItem>
         </Flex>
       </TextContent>

@@ -1,11 +1,11 @@
 import { FunctionComponent } from "react";
-import { ConsumerGroupStateEnum, Consumer } from "../types";
+import { Consumer, ConsumerGroupState } from "../types";
 import { ConsumerGroupByTopic } from "./ConsumerGroupByTopic";
 import { ConsumerGroupByKafka } from "./ConsumerGroupByKafka";
 
 export type ConsumerGroupDetailsProps = {
   consumerGroupByTopic: boolean;
-  state: ConsumerGroupStateEnum;
+  state: ConsumerGroupState;
   consumers: Consumer[];
 };
 
