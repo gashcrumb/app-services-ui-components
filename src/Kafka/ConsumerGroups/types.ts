@@ -18,6 +18,7 @@ export type ConsumerGroupState =
 
 export interface ConsumerGroup {
   consumerGroupId: string;
-  consumers: Array<Consumer>;
+  activeMembers: number;
+  partitionsWithLag: number;
   state: ConsumerGroupState;
 }

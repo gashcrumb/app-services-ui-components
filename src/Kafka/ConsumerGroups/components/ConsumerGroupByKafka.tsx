@@ -19,16 +19,18 @@ import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { Consumer, ConsumerGroupState } from "../types";
 import { ConsumerGroupPopover } from "./ConsumerGroupPopover";
-import { activeMembers, partionsWithLag } from "../utils";
+import { ConsumerGroupStateLabel } from "./ConsumerGroupStateLabel";
 
 export type ConsumerGroupByKafkaProps = {
   state: ConsumerGroupState;
   consumers: Consumer[];
+  activeMembers: number;
+  partitionsWithLag: number;
 };
 
 export const ConsumerGroupByKafka: FunctionComponent<
   ConsumerGroupByKafkaProps
-> = ({ state, consumers }) => {
+> = ({ state, consumers, activeMembers, partitionsWithLag }) => {
   const { t } = useTranslation(["kafka"]);
 
   const columnNames = {
@@ -48,7 +50,7 @@ export const ConsumerGroupByKafka: FunctionComponent<
             <Text component={TextVariants.h4} size={50}>
               {t("consumerGroup.active_members")}
             </Text>
-            <Text component={TextVariants.h2}>{activeMembers(consumers)}</Text>
+            <Text component={TextVariants.h2}>{activeMembers}</Text>
           </FlexItem>
           <FlexItem>
             <Text component={TextVariants.h4}>
@@ -58,13 +60,15 @@ export const ConsumerGroupByKafka: FunctionComponent<
                 description={t("consumerGroup.partitions_with_lag_description")}
               />
             </Text>
-            <Text component={TextVariants.h2}>
-              {partionsWithLag(consumers)}
-            </Text>
+            <Text component={TextVariants.h2}>{partitionsWithLag}</Text>
           </FlexItem>
           <FlexItem>
-            <Text component={TextVariants.h4}>{t("consumerGroup.state")}</Text>
-            <Text component={TextVariants.h2}>{state}</Text>
+            <Text component={TextVariants.h4}>
+              {t("consumerGroup.state_header")}
+            </Text>
+            <Text component={TextVariants.h2}>
+              {ConsumerGroupStateLabel(state)}
+            </Text>
           </FlexItem>
         </Flex>
       </TextContent>

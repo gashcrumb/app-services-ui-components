@@ -37,12 +37,16 @@ export const ConsumerGroupWithNoActiveMembers = Template.bind({});
 ConsumerGroupWithNoActiveMembers.args = {
   state: "CompletingRebalance",
   consumers: withoutConsumer,
+  activeMembers: 1,
+  partitionsWithLag: 2,
 };
 
 export const ConsumerGroupWithActiveMembers = Template.bind({});
 ConsumerGroupWithActiveMembers.args = {
   state: "CompletingRebalance",
   consumers: consumer,
+  activeMembers: 2,
+  partitionsWithLag: 1,
 };
 
 export const ConsumerGroupDetailsAtTopicLevel = Template.bind({});
@@ -50,10 +54,14 @@ ConsumerGroupDetailsAtTopicLevel.args = {
   state: "Unknown",
   consumers: consumer,
   consumerGroupByTopic: true,
+  activeMembers: 2,
+  partitionsWithLag: 2,
 };
 
 export const ConsumerGroupDetailsAtKafkaLevel = Template.bind({});
 ConsumerGroupDetailsAtKafkaLevel.args = {
   state: "Stable",
   consumers: consumer,
+  activeMembers: 0,
+  partitionsWithLag: 1,
 };
