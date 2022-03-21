@@ -82,9 +82,9 @@ export const ConsumerGroupTable: FunctionComponent<ConsumerGroupTableProps> = ({
         </Tr>
       </Thead>
       <Tbody>
-        {consumerGroup.map((consumer) => {
+        {consumerGroup.map((consumer, index) => {
           return (
-            <Tr>
+            <Tr key={index}>
               <Td key={tableColumns.group_id}>{consumer.consumerGroupId}</Td>
               <Td key={tableColumns.active_members}>
                 {consumer.activeMembers}

@@ -55,20 +55,20 @@
     "reset_offset_connected_alert_body": "One or more members of the consumer group are currently connected to a topic. All members of a consumer group must be disconnected before resetting the offset.",
     "reset_offset_connected_alert_title": "The offset for this consumer group cannot be reset at this time",
     "search": "Search consumer groups",
+    "state": {
+      "completing_rebalance": "Completing rebalance",
+      "dead": "Dead",
+      "empty": "Empty",
+      "preparing_rebalance": "Preparing rebalance",
+      "stable": "Stable",
+      "unknown": "Unknown"
+    },
     "state_header": "State",
     "topic_table_aria": "table for consumer groups by topic",
     "unassigned": "unassigned",
     "uncosumed_partitions": "Unconsumed partitions",
     "uncosumed_partitions_for_topic": "Unconsumed partitions for this topic",
-    "view_partitions_offsets": "View partition offsets",
-    "state": {
-      "stable": "Stable",
-      "empty": "Empty",
-      "dead": "Dead",
-      "completing_rebalance": "Completing rebalance",
-      "preparing_rebalance": "Preparing rebalance",
-      "unknown": "Unknown"
-    }
+    "view_partitions_offsets": "View partition offsets"
   },
   "duration": "Duration",
   "duration_value": "48 hours",

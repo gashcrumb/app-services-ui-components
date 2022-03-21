@@ -19,14 +19,38 @@ const ConsumerGroupTableValue: ConsumerGroup[] = [
 
 export default {
   component: ConsumerGroupTable,
-  args: {},
 } as ComponentMeta<typeof ConsumerGroupTable>;
 
 const Template: ComponentStory<typeof ConsumerGroupTable> = (args) => (
   <ConsumerGroupTable {...args} />
 );
 
-export const ConsumersGroupTable = Template.bind({});
-ConsumersGroupTable.args = {
+export const ConsumerGroupTableAtDefault = Template.bind({});
+ConsumerGroupTableAtDefault.args = {
   consumerGroup: ConsumerGroupTableValue,
+};
+
+export const ConsumerGroupTableAtKafkaLevel = Template.bind({});
+ConsumerGroupTableAtKafkaLevel.args = {
+  consumerGroup: ConsumerGroupTableValue,
+};
+ConsumerGroupTableAtKafkaLevel.parameters = {
+  docs: {
+    description: {
+      story: `Kebab menu will be displayed at kafka level consumer group table `,
+    },
+  },
+};
+
+export const ConsumerGroupTableAtTopicLevel = Template.bind({});
+ConsumerGroupTableAtTopicLevel.args = {
+  consumerGroup: ConsumerGroupTableValue,
+  consumerGroupByTopic: true,
+};
+ConsumerGroupTableAtTopicLevel.parameters = {
+  docs: {
+    description: {
+      story: `Kebab menu will not be displayed at topic level consumer group table `,
+    },
+  },
 };
