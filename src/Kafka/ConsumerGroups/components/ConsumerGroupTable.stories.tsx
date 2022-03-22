@@ -4,13 +4,13 @@ import { ConsumerGroup } from "../types";
 
 const ConsumerGroupTableValue: ConsumerGroup[] = [
   {
-    consumerGroupId: "console-consumer-233",
+    consumerGroupId: "consumer-123",
     activeMembers: 1,
     partitionsWithLag: 2,
     state: "CompletingRebalance",
   },
   {
-    consumerGroupId: "console-consumer-233",
+    consumerGroupId: "consumer-233",
     activeMembers: 2,
     partitionsWithLag: 2,
     state: "Stable",

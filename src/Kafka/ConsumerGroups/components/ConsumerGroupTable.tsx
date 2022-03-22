@@ -1,17 +1,20 @@
 import {
   ActionsColumn,
   IAction,
+  ISortBy,
+  SortByDirection,
   TableComposable,
   Tbody,
   Td,
   Th,
   Thead,
+  ThProps,
   Tr,
 } from "@patternfly/react-table";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ConsumerGroup } from "../types";
-import { ConsumerGroupStateLabel } from "./ConsumerGroupStateLabel";
+import { ConsumerGroupStateLabel } from "../utils";
 
 export type ConsumerGroupTableProps = {
   consumerGroup: ConsumerGroup[];
@@ -29,6 +32,47 @@ export const ConsumerGroupTable: FunctionComponent<ConsumerGroupTableProps> = ({
   onClickResetoffset,
 }) => {
   const { t } = useTranslation(["kafka"]);
+
+  const [activeSortIndex, setActiveSortIndex] = useState<number | null>(null);
+  const [activeSortDirection, setActiveSortDirection] =
+    useState<SortByDirection>();
+  const [sortBy, setSortBy] = useState<ISortBy>({
+    index: undefined,
+    direction: "asc",
+  });
+
+  const getSortableRowValues = (repo: ConsumerGroup): (string | number)[] => {
+    const { consumerGroupId, activeMembers, partitionsWithLag, state } = repo;
+    return [consumerGroupId, activeMembers, partitionsWithLag, state];
+  };
+
+  if (activeSortIndex !== null) {
+    consumerGroup.sort((a, b) => {
+      const aValue = getSortableRowValues(a)[activeSortIndex];
+      const bValue = getSortableRowValues(b)[activeSortIndex];
+      if (typeof aValue === "number") {
+        if (activeSortDirection === "asc") {
+          return (aValue as number) - (bValue as number);
+        }
+        return (bValue as number) - (aValue as number);
+      } else {
+        if (activeSortDirection === "asc") {
+          return (aValue as string).localeCompare(bValue as string);
+        }
+        return (bValue as string).localeCompare(aValue as string);
+      }
+    });
+  }
+
+  const getSortParams = (columnIndex: number): ThProps["sort"] => ({
+    sortBy: sortBy,
+    onSort: (_event, index, direction) => {
+      setActiveSortIndex(index);
+      setActiveSortDirection(direction);
+      setSortBy({ index, direction });
+    },
+    columnIndex,
+  });
 
   const tableColumns = {
     group_id: t("consumerGroup.consumer_group_id"),
@@ -63,7 +107,7 @@ export const ConsumerGroupTable: FunctionComponent<ConsumerGroupTableProps> = ({
     <TableComposable aria-label={t("consumerGroup.consumer_group_list")}>
       <Thead>
         <Tr>
-          <Th>{tableColumns.group_id}</Th>
+          <Th sort={getSortParams(0)}>{tableColumns.group_id}</Th>
           <Th>{tableColumns.active_members}</Th>
           <Th
             info={{

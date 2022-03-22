@@ -2,7 +2,6 @@ import { FunctionComponent } from "react";
 import { Consumer, ConsumerGroupState } from "../types";
 import { ConsumerGroupByTopic } from "./ConsumerGroupByTopic";
 import { ConsumerGroupByKafka } from "./ConsumerGroupByKafka";
-import { activeMembers } from "../utils";
 
 export type ConsumerGroupDetailsProps = {
   consumerGroupByTopic: boolean;

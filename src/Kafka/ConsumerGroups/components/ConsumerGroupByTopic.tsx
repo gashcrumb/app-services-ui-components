@@ -19,7 +19,7 @@ import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { Consumer, ConsumerGroupState } from "../types";
 import { ConsumerGroupPopover } from "./ConsumerGroupPopover";
-import { ConsumerGroupStateLabel } from "./ConsumerGroupStateLabel";
+import { ConsumerGroupStateLabel } from "../utils";
 
 export type ConsumerGroupByTopicProps = {
   state: ConsumerGroupState;
